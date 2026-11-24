@@ -71,3 +71,7 @@ rag/
 # LLM API keys
 *.key
 *.secret
+
+# uv
+pyproject.toml
+uv.lock
