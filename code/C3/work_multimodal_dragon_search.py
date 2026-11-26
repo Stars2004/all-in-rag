@@ -11,6 +11,17 @@ from PIL import Image
 from typing import List, Dict, Any
 from dataclasses import dataclass
 
+
+# 对比四种搜索方法
+# 这个脚本给每张图片存了 三个向量字段：
+# 用 Visualized-BGE 生成的图文向量，以及用 BGE-M3 根据图片描述生成的文本密集向量和文本稀疏向量。
+# 然后用同一组查询做四次对比。
+# 1. multimodal 用查询图片和文字一起搜图库里的图文向量。
+# 2. dense 	只用查询文字，找描述里意思接近的图片。
+# 3. sparse 只用查询文字，找描述里关键词更匹配的图片。
+# 4. hybrid 分别跑 dense 和 sparse，再用 RRF 按两张榜单里的排名合成一张榜单。
+
+
 @dataclass
 class DragonImage:
     """龙类图像数据类"""

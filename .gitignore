@@ -75,3 +75,6 @@ rag/
 # uv
 pyproject.toml
 uv.lock
+
+# docker
+code/volumes

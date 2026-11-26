@@ -11,6 +11,18 @@ from PIL import Image
 from typing import List, Dict, Any
 from dataclasses import dataclass
 
+
+# 试三种查询输入
+# 前面学的 04_multi_milvus.py 给图库里的图片建库时，每张图只用图片本身生成向量。
+# 这个练习给图片加上了来自 dragon.json 的标题、描述、地点等信息，然后用 Visualized-BGE 把图片和描述一起编码成一个向量。
+# 比如，「悬崖上的白龙」这张图在建库时，模型既能看到画面，也能读到它的描述。
+
+# 建好库以后，它用同一个向量字段做三次搜索：
+# 1. 图片 + 文字：输入 query.png 和「悬崖上的巨龙」。
+# 2. 只有文字：只输入「悬崖上的巨龙」。
+# 3. 只有图片：只输入 query.png。
+
+
 @dataclass
 class DragonImage:
     """龙类图像数据类"""

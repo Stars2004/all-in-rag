@@ -5,13 +5,21 @@ from llama_index.core import VectorStoreIndex, Document, Settings
 from llama_index.core.retrievers import VectorIndexRetriever
 from llama_index.core.query_engine import RetrieverQueryEngine
 from llama_index.core.vector_stores import MetadataFilters, ExactMatchFilter
-from llama_index.llms.deepseek import DeepSeek
+# from llama_index.llms.deepseek import DeepSeek
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.llms.openai_like import OpenAILike
 
 load_dotenv()
 
 # 配置模型
-Settings.llm = DeepSeek(model="deepseek-chat", api_key=os.getenv("DEEPSEEK_API_KEY"))
+# Settings.llm = DeepSeek(model="deepseek-chat", api_key=os.getenv("DEEPSEEK_API_KEY"))
+Settings.llm = OpenAILike(
+    model=os.environ["DASHSCOPE_MODEL"],
+    api_key=os.environ["DASHSCOPE_API_KEY"],
+    api_base=os.environ["DASHSCOPE_BASE_URL"],
+    is_chat_model=True,
+    temperature=0.1,    # temperature=0.1` 让生成结果通常更稳定。
+)
 Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-zh-v1.5")
 
 # 1. 加载和预处理数据
